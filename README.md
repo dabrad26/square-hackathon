@@ -1,4 +1,4 @@
-# Unreal Pixels Text Encoder and Decoder
+# Square Hackathon Photo Wall
 
 ### `npm start`
 
