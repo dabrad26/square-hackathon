@@ -1,0 +1,85 @@
+// Page Colors
+$page-background: #ffffff;
+
+// Text Colors
+$text-primary: #404446; // Headers
+$text-dark: #090A0A; // Bold text and icons
+$text-secondary: #6C7072;
+$text-tertiary: #72777A;
+
+// Branding Colors
+$brand-primary: #FC0000;
+$brand-secondary: #FFDDDD;
+$brand-accent: #FFF9D7;
+
+// Tag colors
+$tag-background: #F2F4F5;
+$box-background: #F7F9FA;
+
+// Box Colors
+$box-border: #CDCFD0;
+$subtle-border: #F2F4F5;
+
+@mixin basic-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+@mixin regular-font {
+  @include basic-font();
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: $text-primary;
+}
+
+@mixin small-regular-font {
+  @include regular-font();
+
+  font-size: 14px;
+  line-height: 16px;
+}
+
+@mixin tiny-regular-font {
+  @include regular-font();
+
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@mixin small-tight-regular-font {
+  @include small-regular-font();
+
+  color: $text-tertiary;
+  line-height: 16px;
+}
+
+@mixin bold-font {
+  @include basic-font();
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: $text-dark;
+}
+
+@mixin title-2 {
+  @include basic-font();
+
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
+  color: $text-primary;
+}
+
+@mixin title-3 {
+  @include basic-font();
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: $text-primary;
+}

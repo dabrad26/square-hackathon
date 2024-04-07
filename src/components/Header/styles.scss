@@ -1,0 +1,13 @@
+.header {
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0;
+  padding: 0 24px;
+  width: 100%;
+  align-items: center;
+
+  img {
+    max-height: 48px;
+  }
+}

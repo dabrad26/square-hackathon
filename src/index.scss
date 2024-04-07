@@ -1,0 +1,62 @@
+@import './styles/variables';
+
+body {
+  @include regular-font();
+
+  background: $page-background;
+  min-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+.title-2 {
+  @include title-2();
+}
+
+h2,
+.title-3 {
+  @include title-3();
+}
+
+p,
+.regular-font {
+  @include regular-font();
+}
+
+.small-regular-font {
+  @include small-regular-font();
+}
+
+.tiny-regular-font {
+  @include tiny-regular-font();
+}
+
+.small-tight-regular-font {
+  @include small-tight-regular-font();
+}
+
+b,
+strong,
+.bold-font {
+  @include bold-font();
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}

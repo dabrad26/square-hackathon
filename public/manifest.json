@@ -1,6 +1,6 @@
 {
-  "short_name": "Square Hackathon",
-  "name": "Square Hackathon",
+  "short_name": "Square Hackathon - Photo Wall",
+  "name": "Square Hackathon - Photo Wall",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#271d3b"
+  "theme_color": "#FC0000",
+  "background_color": "#ffffff"
 }
