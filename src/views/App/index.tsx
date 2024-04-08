@@ -25,7 +25,8 @@ class App extends React.Component<RouteComponentProps> {
       this.setState({ loading: false });
     }).catch(error => {
       console.error('App: Unable to start', error);
-      this.setState({ loading: false, error: true });
+      // TODO: deal with error this.setState({ loading: false, error: true });
+      this.setState({ loading: false, error: false });
     });
   }
 

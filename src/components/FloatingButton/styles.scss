@@ -1,0 +1,54 @@
+@import '../../styles/variables';
+
+.floating-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: $page-background;
+  padding: 0 16px;
+  padding-bottom: $floating-button-space;
+
+  &.transparent-back {
+    background-color: transparent;
+  }
+
+  .floating-button-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px
+  }
+
+  .floating-close {
+    width: $floating-button-height;
+    height: $floating-button-height;
+    min-width: $floating-button-height;
+    background-color: $brand-secondary;
+    border-radius: $floating-button-height;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    svg {
+      margin-top: 6px;
+    }
+  }
+
+  .floating-action {
+    @include medium-font();
+
+    height: $floating-button-height;
+    border-radius: $floating-button-height;
+    width: 100%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    &.primary {
+      background-color: $brand-primary;
+      color: $text-on-color;
+    }
+
+    &.secondary {
+      background-color: $brand-secondary;
+      color: $brand-primary;
+    }
+  }
+}

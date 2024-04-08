@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+
+.photo-wall {
+  margin: 0 16px;
+
+  h1 {
+    margin-bottom: 40px;
+  }
+
+  .picture-area {
+    height: calc(85vh - $floating-button-total - 100px);
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    overflow: auto;
+
+    .picture-item {
+      @include picture-item();
+
+      cursor: pointer;
+    }
+  }
+}

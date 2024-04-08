@@ -6,15 +6,15 @@
 /* eslint-disable spellcheck/spell-checker */
 import axios, { type AxiosRequestConfig } from 'axios';
 import { type MenuItem } from '../interfaces/SquareData';
+import type PhotoItem from '../interfaces/Photo';
 
 export class DataService {
-  // Used only for hackathon. Not a real Square Instance.
-  // The Sandbox is used since API calls from browser do not seem supported by the real account
-  private apiKey = 'EAAAlyx04XRgiuhRa0XVfPgbprVf_nYRO9XuZhcQ3g-6j3NCrpN35O6YJs6fSU4M';
   /** API Server */
   private apiServer = 'https://connect.squareupsandbox.com/v2';
   /** All items for sale */
   private menuItemsStore: MenuItem[] = [];
+  /** All photo items for wall */
+  private photoStore: PhotoItem[] = [];
 
   get businessInfo(): { name: string } {
     return {
@@ -27,7 +27,6 @@ export class DataService {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${this.apiKey}`,
       },
     };
   }
@@ -57,6 +56,17 @@ export class DataService {
 
   get menuItems(): MenuItem[] {
     return this.menuItemsStore;
+  }
+
+  get photos(): PhotoItem[] {
+    // TODO: get photo store. For now here is a hot dog
+    const items: PhotoItem[] = [];
+
+    for (let i = 0; i < 120; i++) {
+      items.push({ id: 'test', url: 'https://cdn.britannica.com/27/213427-050-869B98FE/Chicago-style-hot-dog.jpg', reviewId: 'TEST' });
+    }
+    return items;
+    return this.photoStore;
   }
 }
 

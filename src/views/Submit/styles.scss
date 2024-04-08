@@ -1,0 +1,89 @@
+@import '../../styles/variables';
+
+.submit {
+  .banner {
+    background-image: url('/banner.jpg');
+    height: 140px;
+    width: 100%;
+    background-position: left top;
+    background-repeat: repeat-x;
+    background-size: contain;
+  }
+
+  .submit-info {
+    margin: 16px 32px;
+    padding: 32px;
+    background-color: $brand-accent;
+
+    .info-text {
+      margin: 32px 0;
+    }
+
+    button {
+      color: $text-on-color;
+      background-color: $brand-primary;
+      width: 100%;
+      max-width: 500px;
+      height: $floating-button-height;
+      border-radius: $floating-button-height;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  .photo-from-customers {
+    margin-top: 24px;
+    margin-left: 16px;
+
+    .heading-text {
+      @include tiny-medium-font();
+
+      margin-bottom: 12px;
+    }
+
+    .picture-wrapper {
+      display: flex;
+      gap: 5px;
+      overflow-y: auto;
+
+      .picture-item {
+        @include picture-item(200px);
+      }
+    }
+
+    button {
+      @include medium-font();
+
+      border: 1px solid $brand-primary;
+      padding: 0 16px;
+      color: $brand-primary;
+      background-color: transparent;
+      height: 32px;
+      border-radius: 32px;
+      margin-left: auto;
+      margin-right: 16px;
+      display: block;
+      margin-top: 12px;
+    }
+  }
+
+  .review-picture-wrapper {
+    display: flex;
+    gap: 5px;
+    overflow-y: auto;
+
+    .picture-item {
+      @include picture-item(320px);
+    }
+  }
+
+  textarea {
+    margin-top: 16px;
+    padding: 16px;
+    width: 100%;
+    border: 0;
+    border-top: 1px solid $subtle-border;
+    height: 200px;
+    resize: none;
+  }
+}

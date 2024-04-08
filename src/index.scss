@@ -11,6 +11,11 @@ body {
   box-sizing: border-box;
 }
 
+h1, h2, h3, h4, p {
+  margin: 0;
+  padding: 0;
+}
+
 h1,
 .title-2 {
   @include title-2();
@@ -59,4 +64,13 @@ button {
   -moz-osx-font-smoothing: inherit;
   appearance: none;
   -webkit-appearance: none;
+}
+
+.has-floating-button {
+  padding-bottom: calc($floating-button-total + 16px);
+}
+
+.main-view {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
 }
