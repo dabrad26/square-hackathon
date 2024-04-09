@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, withRouter, type RouteComponentProps } from 'react-router-dom';
 import PhotoWall from '../../views/PhotoWall';
 import Submit from '../../views/Submit';
-import PhotoDetails from '../../views/PhotoDetails';
+import ReviewDetails from '../../views/ReviewDetails';
 import Menu from '../../views/Menu';
 import MenuDetails from '../../views/MenuDetails';
 import Cart from '../../views/Cart';
@@ -21,8 +21,8 @@ class MainView extends React.Component<RouteComponentProps> {
           <Route path="/photos" exact={true}>
             <PhotoWall />
           </Route>
-          <Route path="/photos/:id">
-            <PhotoDetails />
+          <Route path="/review/:id">
+            <ReviewDetails />
           </Route>
           <Route path="/menu" exact={true}>
             <Menu />

@@ -3,14 +3,20 @@ import './styles.scss';
 import { type RouteComponentProps, withRouter } from 'react-router-dom';
 import dataService from '../../services/DataService';
 import FloatingButton from '../../components/FloatingButton';
+import type PhotoItem from '../../interfaces/Photo';
+import { type MenuItem } from '../../interfaces/SquareData';
+import Loading from '../../components/Loading';
 
-class Submit extends React.Component<RouteComponentProps> {
+class Submit extends React.Component<RouteComponentProps<{ id?: string }>> {
   state = {
-    view: 'pick' as 'pick' | 'review' | 'share',
+    view: 'pick' as 'pick' | 'review',
     reviewText: '',
+    currentPhoto: 0,
+    loading: true,
   };
 
-  private images: string[] = [];
+  private images: PhotoItem[] = [];
+  private receiptItems: MenuItem[] = [];
 
   private seeAllPhotos = (): void => {
     const { history } = this.props;
@@ -62,21 +68,37 @@ class Submit extends React.Component<RouteComponentProps> {
   };
 
   private nextStep = (images: string[]): void => {
-    this.images = images;
+    this.images = images.map(item => {
+      return {
+        foods: [],
+        url: item,
+      };
+    });
+
     this.setState({ view: 'review' });
   };
 
   private cancel = (): void => {
+    this.images = [];
     this.setState({ view: 'pick', reviewText: '' });
   };
 
   private postReview = (): void => {
-    // TODO: Save data
-    this.setState({ view: 'share' });
+    const { history } = this.props;
+    const { reviewText } = this.state;
+
+    this.setState({ loading: true });
+    dataService.saveReview({ text: reviewText, photos: this.images }).then(response => {
+      this.setState({ loading: false });
+      history.push(`/review/${response.id || ''}?share_mode=true`);
+    }).catch(error => {
+      this.setState({ loading: false });
+      console.error('Unable to submit review', error);
+    });
   };
 
   private get mainView(): React.ReactNode {
-    const { view, reviewText } = this.state;
+    const { view, reviewText, currentPhoto } = this.state;
 
     switch (view) {
       case 'review':
@@ -84,18 +106,41 @@ class Submit extends React.Component<RouteComponentProps> {
           <>
             <div className="review-picture-wrapper">
               {this.images.map((item, index) => {
-                return <div key={index} className="picture-item" style={{ backgroundImage: `url(${item})` }} />;
+                return <div key={index} className={`picture-item ${currentPhoto === index ? 'selected-item' : ''}`} onClick={() => { this.setState({ currentPhoto: index }); }} style={{ backgroundImage: `url(${item.url})` }} />;
               })}
+            </div>
+            <div className="review-tag-items">
+              <div className="small-tight-regular-font">What&apos;s in this photo?</div>
+              <div className="tags-wrapper">
+                {(this.receiptItems.length ? this.receiptItems : dataService.menuItems).map((item, index) => {
+                  const currentFood = this.images[currentPhoto];
+                  const currentTags = currentFood?.foods || [];
+                  const isActive = currentTags.includes(item.name);
+
+                  return <div
+                    key={index}
+                    onClick={() => {
+                      if (isActive) {
+                        const foundIndex = currentFood.foods.indexOf(item.name);
+
+                        if (foundIndex !== -1) {
+                          currentFood.foods.splice(foundIndex, 1);
+                        }
+                      } else {
+                        currentFood.foods?.push(item.name);
+                      }
+
+                      this.setState({});
+                    }}
+                    className={`tag-item ${isActive ? 'selected' : ''}`}
+                  >
+                    {item.name}
+                  </div>;
+                })}
+              </div>
             </div>
             <textarea value={reviewText} onChange={event => { this.setState({ reviewText: event.target.value }); }} placeholder="What did you like about your dish?" />
             <FloatingButton text="Post it" kind="primary" onClick={this.postReview} closeAction={this.cancel} />
-          </>
-        );
-      case 'share':
-        return (
-          <>
-            <h1>TODO: shared component for viewing reviews</h1>
-            <FloatingButton text="Share" kind="primary" onClick={this.share} />
           </>
         );
       case 'pick':
@@ -123,8 +168,28 @@ class Submit extends React.Component<RouteComponentProps> {
     }
   }
 
+  componentDidMount(): void {
+    const { match } = this.props;
+
+    if (match.params.id) {
+      dataService.getReceiptMenuItems(match.params.id).then(data => {
+        this.receiptItems = data;
+        this.setState({ loading: false });
+      }).catch(error => {
+        console.error('Submit: unable to get receipt data', error);
+        this.setState({ loading: false });
+      });
+    } else {
+      this.setState({ loading: false });
+    }
+  }
+
   render (): React.ReactNode {
-    const { view } = this.state;
+    const { view, loading } = this.state;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     return (
       <div className={`submit ${view !== 'pick' ? 'has-floating-button' : ''}`}>

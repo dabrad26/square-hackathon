@@ -74,16 +74,47 @@
 
     .picture-item {
       @include picture-item(320px);
+
+      cursor: pointer;
+
+      &.selected-item {
+        border: 2px solid $brand-primary;
+      }
     }
   }
 
   textarea {
-    margin-top: 16px;
     padding: 16px;
     width: 100%;
     border: 0;
     border-top: 1px solid $subtle-border;
     height: 200px;
     resize: none;
+  }
+
+  .review-tag-items {
+    margin: 16px;
+    margin-bottom: 0;
+
+    .tags-wrapper {
+      margin-top: 12px;
+      overflow-x: auto;
+      display: flex;
+      gap: 12px;
+      padding-bottom: 16px;
+
+      .tag-item {
+        padding: 8px 16px;
+        background-color: $tag-background;
+        border-radius: 32px;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &.selected {
+          background-color: $brand-secondary;
+          color: $brand-primary;
+        }
+      }
+    }
   }
 }

@@ -15,7 +15,7 @@ class PhotoWall extends React.Component<RouteComponentProps> {
   private openItem = (image: PhotoItem): void => {
     const { history } = this.props;
 
-    history.push(`/photos/${image.reviewId}`);
+    history.push(`/review/${image.reviewId || ''}`);
   };
 
   render (): React.ReactNode {
