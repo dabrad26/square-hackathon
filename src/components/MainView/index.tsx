@@ -15,7 +15,10 @@ class MainView extends React.Component<RouteComponentProps> {
           <Route exact={true} path="/">
             <PhotoWall />
           </Route>
-          <Route path="/submit">
+          <Route exact={true} path="/submit">
+            <Submit />
+          </Route>
+          <Route path="/submit/:id">
             <Submit />
           </Route>
           <Route path="/photos" exact={true}>
