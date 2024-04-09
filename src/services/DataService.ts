@@ -34,14 +34,14 @@ export class DataService {
 
   async init(): Promise<unknown> {
     const apiCalls = [
-      axios.get(`${this.apiServer}/photo-wall/menu`, this.apiCallConfig).then(response => {
-        this.menuItemsStore = (response.data.objects || []).map((item: any) => {
+      axios.get(`${this.apiServer}/photo-wall/menu.php`, this.apiCallConfig).then(response => {
+        this.menuItemsStore = (response.data.data.objects || []).map((item: any) => {
           return {
             id: item.id,
-            name: item.name,
+            name: item.item_data.name,
             description: item.item_data.description,
             is_taxable: !!item.item_data.is_taxable,
-            variations: item.variations.map((variant: any) => {
+            variations: item.item_data.variations.map((variant: any) => {
               return {
                 id: variant.id,
                 name: variant.item_variation_data.name,
@@ -55,8 +55,8 @@ export class DataService {
 
         return response;
       }),
-      axios.get(`${this.apiServer}/photo-wall/reviews`, this.apiCallConfig).then(response => {
-        this.reviewItemStore = response.data;
+      axios.get(`${this.apiServer}/photo-wall/reviews.php`, this.apiCallConfig).then(response => {
+        this.reviewItemStore = response.data.data;
 
         return response;
       }),
@@ -66,8 +66,8 @@ export class DataService {
   }
 
   async saveReview(data: ReviewItem): Promise<ReviewItem> {
-    return await axios.post(`${this.apiServer}/photo-wall/reviews`, data, this.apiCallConfig).then(response => {
-      const newItem = response.data as ReviewItem;
+    return await axios.post(`${this.apiServer}/photo-wall/reviews.php`, data, this.apiCallConfig).then(response => {
+      const newItem = response.data.data as ReviewItem;
       this.reviewItemStore.push(newItem);
 
       return newItem;
@@ -75,8 +75,8 @@ export class DataService {
   }
 
   async getReceiptMenuItems(id: string): Promise<MenuItem[]> {
-    return await axios.get(`${this.apiServer}/photo-wall/receipt/${id}`, this.apiCallConfig).then(response => {
-      const receiptMenuItems: MenuItem[] = (response.data.order.line_items || []).map((item: any) => {
+    return await axios.get(`${this.apiServer}/photo-wall/receipt.php?id=${id}`, this.apiCallConfig).then(response => {
+      const receiptMenuItems: MenuItem[] = (response.data.data.order.line_items || []).map((item: any) => {
         return {
           id: item.uid,
           name: item.name,
@@ -107,7 +107,7 @@ export class DataService {
 
     this.reviewItemStore.forEach(item => {
       item.photos.forEach(photo => {
-        photo.reviewId = item.id;
+        photo.review_id = item.id;
 
         items.push(photo);
       });

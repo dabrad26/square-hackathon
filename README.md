@@ -13,7 +13,7 @@ Builds the app for production to the `build` folder.
 
 ## API Server
 
-### GET /photo-wall/menu
+### GET /photo-wall/menu.php
 
 Proxy of Square API /catalog/list
 
@@ -25,6 +25,6 @@ Retrieve saved reviews from local Database
 
 Data is ReviewItem. Returns ReviewItem (with DB ID)
 
-### GET /photo-wall/receipt/${id}
+### GET /photo-wall/receipt.php?id=${id}
 
 ID of an Order.  Proxy of Square API /orders/{order_id}

@@ -5,5 +5,5 @@ export default interface PhotoItem {
   /** ID of foods to tag (name of item. Order API does not return ID of an item. So rely on name.) */
   foods: string[]
   /** Review item (added for Photos use) */
-  reviewId?: string
+  review_id?: string
 }
