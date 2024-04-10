@@ -6,7 +6,7 @@ class Menu extends React.Component<RouteComponentProps> {
   render (): React.ReactNode {
     return (
       <div className="menu">
-        Menu View
+        TODO: Menu View
       </div>
     );
   }

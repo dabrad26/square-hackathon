@@ -7,19 +7,23 @@ interface FloatingButtonProps {
   text: string
   kind: 'primary' | 'secondary'
   transparent?: boolean
+  icon?: React.ReactNode
   onClick: () => void
   closeAction?: () => void
 }
 
 export default class FloatingButton extends React.Component<FloatingButtonProps> {
   render (): React.ReactNode {
-    const { text, kind, transparent, onClick, closeAction } = this.props;
+    const { text, kind, transparent, onClick, closeAction, icon } = this.props;
 
     return (
       <div className={`floating-button ${transparent ? 'transparent-back' : ''}`}>
         <div className="floating-button-wrapper">
           {!!closeAction && <button onClick={closeAction} type="button" className="floating-close"><IconClose color={primaryBrand} /></button>}
-          <button type="button" onClick={onClick} className={`floating-action ${kind} `}>{text}</button>
+          <button type="button" onClick={onClick} className={`floating-action ${kind} `}>
+            {text}
+            {!!icon && icon}
+            </button>
         </div>
       </div>
     );

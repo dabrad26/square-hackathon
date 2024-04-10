@@ -11,7 +11,7 @@ import type ReviewItem from '../interfaces/Review';
 
 export class DataService {
   /** API Server */
-  private apiServer = 'https://api.unrealpixels.dev';
+  private apiServer = 'http://localhost:8000'; // 'https://api.unrealpixels.dev';
   /** All items for sale */
   private menuItemsStore: MenuItem[] = [];
   /** All reviews */
@@ -47,7 +47,7 @@ export class DataService {
                 name: variant.item_variation_data.name,
                 ordinal: variant.item_variation_data.ordinal,
                 pricing_type: variant.item_variation_data.pricing_type,
-                price: variant.item_variation_data.price_money?.amount || 0,
+                price: variant.item_variation_data.price_money?.amount || 1.22,
               };
             }),
           };
@@ -96,6 +96,14 @@ export class DataService {
 
       return receiptMenuItems;
     });
+  }
+
+  getReviewById(id: string): ReviewItem | undefined {
+    return this.reviewItemStore.find(item => item.id === id);
+  }
+
+  findMatchingMenuItem(menuItemName: string): MenuItem | undefined {
+    return this.menuItemsStore.find(item => item.name === menuItemName);
   }
 
   get menuItems(): MenuItem[] {

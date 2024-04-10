@@ -5,6 +5,7 @@ import MainView from '../../components/MainView';
 import Header from '../../components/Header';
 import dataService from '../../services/DataService';
 import Loading from '../../components/Loading';
+import ErrorView from '../../components/ErrorView';
 
 class App extends React.Component<RouteComponentProps> {
   state = {
@@ -37,7 +38,7 @@ class App extends React.Component<RouteComponentProps> {
     }
 
     if (error) {
-      return <h1>An error has occurred</h1>;
+      return <ErrorView text="Unable to load needed resources." />;
     }
 
     return (

@@ -6,7 +6,7 @@ class Cart extends React.Component<RouteComponentProps> {
   render (): React.ReactNode {
     return (
       <div className="cart">
-        Cart View
+        TODO: Cart View
       </div>
     );
   }

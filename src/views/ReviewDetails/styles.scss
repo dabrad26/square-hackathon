@@ -1,0 +1,68 @@
+@import '../../styles/variables';
+
+.review-details {
+  .breadcrumb {
+    color: $brand-primary;
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+
+    svg {
+      width: 16px !important;
+      height: 16px !important;
+    }
+
+    span {
+      @include medium-font();
+
+      color: $brand-primary;
+    }
+  }
+
+  .picture-wrapper {
+    display: flex;
+    gap: 5px;
+    overflow-y: auto;
+    padding: 0 16px;
+    margin-top: 16px;
+
+    .picture-item {
+      @include picture-item(320px);
+    }
+
+    .tag-wrapper {
+      padding: 16px;
+
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      .food-tag {
+        @include bold-font();
+
+        width: 130px;
+        min-height: 56px;
+        cursor: pointer;
+        padding: 12px;
+        background-color: $box-background;
+
+        &--primary {
+          display: block;
+          line-height: 16px;
+        }
+
+        &--secondary {
+          @include small-regular-font();
+
+          display: block;
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+
+  .review-text {
+    margin-top: 32px;
+    padding: 0 16px;
+  }
+}

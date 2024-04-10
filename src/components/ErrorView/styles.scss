@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+.error {
+  padding: 32px 16px;
+  text-align: center;
+
+  &--image {
+    width: 100%;
+
+    img {
+      max-width: 300px;
+      width: 100%;
+    }
+  }
+
+  &--text {
+    margin-top: 32px;
+
+    @include title-3();
+  }
+}

@@ -63,10 +63,6 @@ class Submit extends React.Component<RouteComponentProps<{ id?: string }>> {
     }
   };
 
-  private share = (): void => {
-    alert('TODO: Share');
-  };
-
   private nextStep = (images: string[]): void => {
     this.images = images.map(item => {
       return {
