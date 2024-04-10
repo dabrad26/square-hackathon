@@ -47,7 +47,7 @@ export class DataService {
                 name: variant.item_variation_data.name,
                 ordinal: variant.item_variation_data.ordinal,
                 pricing_type: variant.item_variation_data.pricing_type,
-                price: variant.item_variation_data.price_money?.amount || 1.22,
+                price: variant.item_variation_data.price_money?.amount || 0,
               };
             }),
           };
