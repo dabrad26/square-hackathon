@@ -12,7 +12,7 @@ import { type CartItem } from '../interfaces/CartItem';
 
 export class DataService {
   /** API Server */
-  private apiServer = 'http://localhost:8000'; // 'https://api.unrealpixels.dev';
+  private apiServer = 'https://unrealpixels.app/api';
   /** All items for sale */
   private menuItemsStore: MenuItem[] = [];
   /** All categories */

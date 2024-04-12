@@ -6,6 +6,7 @@ import ReviewDetails from '../../views/ReviewDetails';
 import Menu from '../../views/Menu';
 import MenuDetails from '../../views/MenuDetails';
 import Cart from '../../views/Cart';
+import ErrorView from '../ErrorView';
 
 class MainView extends React.Component<RouteComponentProps> {
   render (): React.ReactNode {
@@ -37,7 +38,7 @@ class MainView extends React.Component<RouteComponentProps> {
             <Cart />
           </Route>
           <Route path="*">
-            <h1>Page Not Found</h1>
+            <ErrorView text="Page not found" />
           </Route>
         </Switch>
       </div>
