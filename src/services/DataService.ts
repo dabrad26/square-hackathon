@@ -131,7 +131,7 @@ export class DataService {
   async saveReview(data: ReviewItem): Promise<ReviewItem> {
     return await axios.post(`${this.apiServer}/photo-wall/reviews.php`, data, this.apiCallConfig).then(response => {
       const newItem = response.data.data as ReviewItem;
-      this.reviewItemsStore.push(newItem);
+      this.reviewItemsStore.unshift(newItem);
 
       return newItem;
     });
