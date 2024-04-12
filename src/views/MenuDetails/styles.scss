@@ -1,0 +1,64 @@
+@import '../../styles/variables';
+
+.menu-details {
+  .wrapped-items {
+    padding: 0 16px;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin-bottom: 8px;
+  }
+
+  .description {
+    color: $text-secondary;
+  }
+
+  .picture-area {
+    height: 153px;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow: auto;
+    margin: 29px 0;
+
+    .picture-item {
+      @include picture-item(153px);
+    }
+  }
+
+  .quantity-change {
+    border: 1px solid $tag-border;
+    border-radius: 30px;
+    display: inline-block;
+
+    &--action {
+      height: 48px;
+      width: 56px;
+    }
+
+    &--count {
+      @include bold-font();
+
+      display: inline-block;
+      height: 48px;
+      line-height: 48px;
+      vertical-align: top;
+      width: 20px;
+      text-align: center;
+    }
+  }
+
+  .special-instructions {
+    padding: 8px;
+    border: 1px solid $tag-border;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 327px;
+    resize: none;
+  }
+}

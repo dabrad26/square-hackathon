@@ -1,0 +1,64 @@
+@import '../../styles/variables';
+
+.menu {
+  padding: 0 16px;
+
+  .menu-group {
+    margin-top: 24px;
+
+    &--label {
+      margin-bottom: 12px;
+    }
+
+    &--items {
+      margin-bottom: 12px;
+    }
+
+    &--item {
+      display: flex;
+      gap: 12px;
+      border-top: 1px solid $subtle-border;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $box-background;
+      }
+
+      &--image {
+        flex: 0 0 100px;
+        width: 100px;
+        height: 100px;
+        max-width: calc(100vw - 32px);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+
+      &--info {
+        flex: 1;
+        min-width: 1px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        &-name {
+          @include bold-font();
+          color: $text-dark;
+          margin-bottom: 4px;
+        }
+
+        &-description {
+          margin-bottom: 12px;
+          color: $text-secondary;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        &-price {
+          @include medium-font();
+          color: $text-dark;
+        }
+      }
+    }
+  }
+}

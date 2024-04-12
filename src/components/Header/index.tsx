@@ -49,8 +49,9 @@ class Header extends React.Component<RouteComponentProps> {
         </button>
         {cartView
           ? <div className="spacer" />
-          : <button type="button" onClick={this.clickedCart}>
+          : <button type="button" className="cart-wrapper" onClick={this.clickedCart}>
           <IconCart color={darkColor} />
+          {!!dataService.cartTotalItems && <div className="cart-count">{dataService.cartTotalItems}</div>}
         </button>}
       </div>
     );

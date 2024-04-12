@@ -153,7 +153,7 @@ class Submit extends React.Component<RouteComponentProps<{ id?: string }>> {
             <div className="photo-from-customers">
               <p className="heading-text">From customers</p>
               <div className="picture-wrapper">
-                {dataService.photos.map((item, index) => {
+                {dataService.getPhotos().map((item, index) => {
                   return <div key={index} className="picture-item" style={{ backgroundImage: `url(${item.url})` }} />;
                 })}
               </div>

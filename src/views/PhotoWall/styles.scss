@@ -11,7 +11,7 @@
     height: calc(85vh - $floating-button-total - 100px);
     display: flex;
     gap: 5px;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
     overflow: auto;
@@ -20,6 +20,49 @@
       @include picture-item();
 
       cursor: pointer;
+    }
+  }
+
+  .filter {
+    margin-bottom: 24px;
+
+    &--label {
+      display: flex;
+
+      &--heading {
+        @include medium-font();
+
+        flex: 1;
+      }
+
+      &--clear {
+        @include medium-font();
+        color: $brand-primary;
+        flex: 0 0 200px;
+        text-align: right;
+        padding: 0 16px;
+      }
+    }
+
+    &--tags {
+      margin-top: 12px;
+      overflow-x: auto;
+      display: flex;
+      gap: 12px;
+      padding-bottom: 16px;
+
+      .tag-item {
+        padding: 8px 16px;
+        background-color: $tag-background;
+        border-radius: 32px;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &.selected {
+          background-color: $brand-secondary;
+          color: $brand-primary;
+        }
+      }
     }
   }
 }

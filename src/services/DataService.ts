@@ -5,17 +5,53 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable spellcheck/spell-checker */
 import axios, { type AxiosRequestConfig } from 'axios';
-import { type MenuItem } from '../interfaces/SquareData';
+import { type CategoryItem, type MenuItem } from '../interfaces/SquareData';
 import type PhotoItem from '../interfaces/Photo';
 import type ReviewItem from '../interfaces/Review';
+import { type CartItem } from '../interfaces/CartItem';
 
 export class DataService {
   /** API Server */
   private apiServer = 'http://localhost:8000'; // 'https://api.unrealpixels.dev';
   /** All items for sale */
   private menuItemsStore: MenuItem[] = [];
+  /** All categories */
+  private categoriesStore: CategoryItem[] = [];
   /** All reviews */
-  private reviewItemStore: ReviewItem[] = [];
+  private reviewItemsStore: ReviewItem[] = [];
+  /** All cart items */
+  private cartItemsStore: CartItem[] = [];
+  /** Cart local storage key */
+  private cartStorageKey = 'photo-wall-cart-items';
+
+  private parsePrice(price: any): number {
+    const testNumber = Number(price);
+
+    if (isNaN(testNumber)) {
+      price = 0;
+    }
+
+    return testNumber / 100;
+  }
+
+  saveCartToStorage(): void {
+    try {
+      const stringCart = JSON.stringify(this.cartItemsStore);
+      localStorage.setItem(this.cartStorageKey, stringCart);
+    } catch (error) {
+      console.error('DataService: unable to save cart to storage', error);
+    }
+  }
+
+  displayPrice(price: any): string {
+    const testNumber = Number(price);
+
+    if (isNaN(testNumber)) {
+      price = 0;
+    }
+
+    return testNumber.toFixed(2);
+  }
 
   get businessInfo(): { name: string } {
     return {
@@ -33,21 +69,48 @@ export class DataService {
   }
 
   async init(): Promise<unknown> {
+    try {
+      const stringCart = localStorage.getItem(this.cartStorageKey);
+
+      if (stringCart) {
+        this.cartItemsStore = JSON.parse(stringCart);
+      }
+    } catch (error) {
+      console.error('DataService: unable to parse cart from storage', error);
+    }
+
     const apiCalls = [
       axios.get(`${this.apiServer}/photo-wall/menu.php`, this.apiCallConfig).then(response => {
-        this.menuItemsStore = (response.data.data.objects || []).map((item: any) => {
+        const imageMap = new Map<string, string>();
+        (response.data.data.objects || []).filter((item: any) => item.type === 'IMAGE').forEach((item: any) => {
+          imageMap.set(item.id as string, item.image_data?.url as string);
+        });
+
+        this.categoriesStore = (response.data.data.objects || []).filter((item: any) => item.type === 'CATEGORY' && !!item.category_data).map((item: any) => {
           return {
             id: item.id,
-            name: item.item_data.name,
-            description: item.item_data.description,
-            is_taxable: !!item.item_data.is_taxable,
-            variations: item.item_data.variations.map((variant: any) => {
+            name: item.category_data?.name,
+          };
+        });
+        this.menuItemsStore = (response.data.data.objects || []).filter((item: any) => item.type === 'ITEM' && !!item.item_data).map((item: any) => {
+          const category = Array.isArray(item.item_data?.categories) ? item.item_data?.categories[0] : undefined;
+          const firstVariant = (item.item_data?.variations || [])[0];
+
+          return {
+            id: item.id,
+            name: item.item_data?.name,
+            description: item.item_data?.description,
+            is_taxable: !!item.item_data?.is_taxable,
+            category_id: category?.id,
+            image: Array.isArray(item.item_data?.image_ids) ? imageMap.get(item.item_data?.image_ids[0] as string) : '',
+            basePrice: this.parsePrice(firstVariant?.item_variation_data?.price_money?.amount || 0),
+            variations: (item.item_data?.variations || []).filter((variant: any) => !!variant.item_variation_data).map((variant: any) => {
               return {
                 id: variant.id,
-                name: variant.item_variation_data.name,
-                ordinal: variant.item_variation_data.ordinal,
-                pricing_type: variant.item_variation_data.pricing_type,
-                price: variant.item_variation_data.price_money?.amount || 0,
+                name: variant.item_variation_data?.name,
+                ordinal: variant.item_variation_data?.ordinal,
+                pricing_type: variant.item_variation_data?.pricing_type,
+                price: this.parsePrice(variant.item_variation_data?.price_money?.amount || 0),
               };
             }),
           };
@@ -56,7 +119,7 @@ export class DataService {
         return response;
       }),
       axios.get(`${this.apiServer}/photo-wall/reviews.php`, this.apiCallConfig).then(response => {
-        this.reviewItemStore = response.data.data;
+        this.reviewItemsStore = response.data.data;
 
         return response;
       }),
@@ -68,7 +131,7 @@ export class DataService {
   async saveReview(data: ReviewItem): Promise<ReviewItem> {
     return await axios.post(`${this.apiServer}/photo-wall/reviews.php`, data, this.apiCallConfig).then(response => {
       const newItem = response.data.data as ReviewItem;
-      this.reviewItemStore.push(newItem);
+      this.reviewItemsStore.push(newItem);
 
       return newItem;
     });
@@ -99,7 +162,7 @@ export class DataService {
   }
 
   getReviewById(id: string): ReviewItem | undefined {
-    return this.reviewItemStore.find(item => item.id === id);
+    return this.reviewItemsStore.find(item => item.id === id);
   }
 
   findMatchingMenuItem(menuItemName: string): MenuItem | undefined {
@@ -110,12 +173,55 @@ export class DataService {
     return this.menuItemsStore;
   }
 
-  get photos(): PhotoItem[] {
+  get categoryItems(): CategoryItem[] {
+    return this.categoriesStore;
+  }
+
+  get cartItems(): CartItem[] {
+    return this.cartItemsStore;
+  }
+
+  get cartTotalItems(): number {
+    return this.cartItemsStore.reduce((value, current) => value + current.quantity, 0);
+  }
+
+  addCartItem(item: CartItem): void {
+    this.cartItemsStore.push(item);
+    this.saveCartToStorage();
+  }
+
+  removeCartItem(item: CartItem): void {
+    const foundIndex = this.cartItemsStore.findIndex(cartItem => cartItem.id === item.id);
+
+    if (foundIndex !== -1) {
+      this.cartItemsStore.splice(foundIndex, 1);
+    }
+
+    this.saveCartToStorage();
+  }
+
+  updateCartItem(item: CartItem): void {
+    const foundIndex = this.cartItemsStore.findIndex(cartItem => cartItem.id === item.id);
+
+    if (foundIndex !== -1) {
+      this.cartItemsStore[foundIndex] = item;
+    }
+
+    this.saveCartToStorage();
+  }
+
+  getPhotos(name?: string): PhotoItem[] {
     const items: PhotoItem[] = [];
 
-    this.reviewItemStore.forEach(item => {
+    this.reviewItemsStore.forEach(item => {
       item.photos.forEach(photo => {
         photo.review_id = item.id;
+
+        if (name) {
+          if (!photo.foods.includes(name)) {
+            return;
+          }
+        }
 
         items.push(photo);
       });

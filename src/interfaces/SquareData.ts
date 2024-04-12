@@ -3,7 +3,7 @@ export interface MenuItemVariant {
   name: string
   ordinal: number
   pricing_type: 'FIXED_PRICING' | 'VARIABLE_PRICING'
-  price?: number
+  price?: string
 }
 
 export interface MenuItem {
@@ -11,5 +11,13 @@ export interface MenuItem {
   name: string
   description: string
   is_taxable: boolean
+  category_id?: string
+  basePrice: number
+  image: string
   variations: MenuItemVariant[]
+}
+
+export interface CategoryItem {
+  id: string
+  name: string
 }
