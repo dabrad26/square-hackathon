@@ -106,7 +106,7 @@ class MenuDetails extends React.Component<RouteComponentProps<{ id: string }>> {
           </div>
         </div>
         <div className="wrapped-items">
-          <textarea className="special-instructions" value={specialInstructions} onChange={event => { this.setState({ specialInstructions: event.target.value }); }} placeholder="Special instructions" />
+          <input type="text" className="special-instructions" value={specialInstructions} onChange={event => { this.setState({ specialInstructions: event.target.value }); }} placeholder="Special instructions" />
         </div>
         <FloatingButton text={`Add to order $${dataService.displayPrice(this.totalPrice)}`} kind="primary" closeAction={this.goBack} onClick={this.addToOrder} />
       </div>

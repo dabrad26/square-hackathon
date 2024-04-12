@@ -23,7 +23,7 @@
     .cart-count {
       @include tiny-regular-font();
 
-      color: white;
+      color: $text-on-color;
       background-color: $brand-primary;
       position: absolute;
       top: -10px;

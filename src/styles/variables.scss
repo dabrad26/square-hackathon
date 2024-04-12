@@ -83,6 +83,12 @@ $subtle-border: #F2F4F5;
   color: $text-dark;
 }
 
+@mixin large-bold-font {
+  @include bold-font();
+
+  font-size: 18px;
+}
+
 @mixin title-2 {
   @include basic-font();
 

@@ -67,7 +67,7 @@ button {
 }
 
 .has-floating-button {
-  padding-bottom: calc($floating-button-total + 16px);
+  padding-bottom: calc($floating-button-total + 16px) !important;
 }
 
 .main-view {

@@ -1,0 +1,228 @@
+@import '../../styles/variables';
+
+.cart {
+  padding: 0 16px;
+
+  .cart-item {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+
+    &--image {
+      flex: 0 0 100px;
+      width: 100px;
+      height: 100px;
+      max-width: calc(100vw - 32px);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
+
+    &--info {
+      flex: 1;
+      min-width: 1px;
+      display: flex;
+
+      &-name {
+        @include bold-font();
+        color: $text-dark;
+        margin-bottom: 4px;
+      }
+
+      &-price {
+        @include medium-font();
+        color: $text-dark;
+        margin-bottom: 8px;
+      }
+
+      &-price-info {
+        @include tiny-regular-font();
+        color: $text-secondary;
+      }
+
+      &--left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      &--right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 0 0 140px;
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+  }
+
+  .empty-cart {
+    h2 {
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    &--action {
+      @include medium-font();
+
+      padding: 0 16px;
+      min-width: 326px;
+      margin: 0 auto;
+      color: $text-on-color;
+      background-color: $brand-primary;
+      height: 48px;
+      border-radius: 32px;
+      display: block;
+      margin-top: 12px;
+    }
+  }
+
+  .cart-pickup {
+    margin-top: 24px;
+    padding: 12px;
+    background-color: $box-background;
+    border: 1px solid $box-border;
+
+    &--item {
+      @include tiny-regular-font();
+      color: $text-dark;
+
+      svg {
+        margin-right: 12px;
+        vertical-align: middle;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  .secondary-action {
+    @include medium-font();
+
+    padding: 0 16px;
+    min-width: 326px;
+    color: $brand-primary;
+    background-color: $brand-secondary;
+    height: 48px;
+    border-radius: 32px;
+    display: block;
+    margin: 24px auto;
+  }
+
+  .tertiary-action {
+    @include medium-font();
+
+    padding: 0 16px;
+    min-width: 326px;
+    border: 1px solid $brand-primary;
+    color: $brand-primary;
+    background-color: transparent;
+    width: 100%;
+    height: 48px;
+    max-width: 400px;
+    border-radius: 32px;
+    display: block;
+    margin: 24px auto;
+  }
+
+  .tip-area {
+    margin-bottom: 24px;
+
+    &--label {
+      @include small-regular-font();
+      margin-bottom: 8px;
+    }
+
+    &--options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .tip-option {
+        background-color: $box-background;
+        padding: 12px;
+        min-width: 90px;
+        cursor: pointer;
+
+        &--primary {
+          @include bold-font();
+          margin-bottom: 4px;
+        }
+
+        &--secondary {
+          @include small-regular-font();
+        }
+
+        &.active {
+          background-color: $brand-secondary;
+
+          div {
+            color: $brand-primary;
+          }
+        }
+      }
+    }
+  }
+
+  .promo-code {
+    padding: 8px;
+    display: block;
+    border: 1px solid $tag-border;
+    margin: 0 auto;
+    margin-top: 16px;
+    width: 100%;
+    height: 48px;
+    max-width: 400px;
+    border-radius: 8px;
+  }
+
+  .cart-summary {
+    margin-top: 40px;
+    border-top: 1px solid $subtle-border;
+    padding-top: 16px;
+
+    &--row {
+      margin-bottom: 12px;
+      display: flex;
+
+      &--primary {
+        @include medium-font();
+        color: $text-dark;
+        flex: 1;
+      }
+
+      &.important {
+        span {
+          @include large-bold-font();
+        }
+      }
+    }
+  }
+
+  .quantity-change {
+    border: 1px solid $tag-border;
+    border-radius: 30px;
+    display: inline-block;
+
+    &--action {
+      height: 32px;
+      width: 34px;
+      padding-top: 3px;
+    }
+
+    &--count {
+      @include bold-font();
+
+      display: inline-block;
+      height: 32px;
+      line-height: 32px;
+      vertical-align: top;
+      width: 20px;
+      text-align: center;
+    }
+  }
+}
