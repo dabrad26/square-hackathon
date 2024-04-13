@@ -13,6 +13,17 @@ class App extends React.Component<RouteComponentProps> {
     error: false,
   };
 
+  private get isIOS(): boolean {
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod',
+    ].includes(navigator.platform);
+  }
+
   componentDidMount (): void {
     const { history } = this.props;
     const route = localStorage.getItem('route');
@@ -42,7 +53,7 @@ class App extends React.Component<RouteComponentProps> {
     }
 
     return (
-      <div className="app-root">
+      <div className={`app-root ${this.isIOS ? 'ios-device' : ''}`}>
         <Header />
         <MainView />
       </div>

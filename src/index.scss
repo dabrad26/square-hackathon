@@ -84,5 +84,8 @@ button {
 .app-root {
   position: relative;
   height: 100vh;
-  height: -webkit-fill-available;
+
+  &.ios-device {
+    height: -webkit-fill-available;
+  }
 }
