@@ -121,6 +121,12 @@ export class DataService {
       axios.get(`${this.apiServer}/photo-wall/reviews.php`, this.apiCallConfig).then(response => {
         this.reviewItemsStore = response.data.data;
 
+        this.reviewItemsStore.forEach(item => {
+          item.photos.forEach(photo => {
+            photo.url = `${this.apiServer}/photo-wall/${photo.url}`;
+          });
+        });
+
         return response;
       }),
     ];
@@ -131,6 +137,11 @@ export class DataService {
   async saveReview(data: ReviewItem): Promise<ReviewItem> {
     return await axios.post(`${this.apiServer}/photo-wall/reviews.php`, data, this.apiCallConfig).then(response => {
       const newItem = response.data.data as ReviewItem;
+
+      newItem.photos.forEach(photo => {
+        photo.url = `${this.apiServer}/photo-wall/${photo.url}`;
+      });
+
       this.reviewItemsStore.unshift(newItem);
 
       return newItem;

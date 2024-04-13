@@ -7,7 +7,7 @@ export default defineConfig(() => {
     server: {
       port: 3000,
       open: true,
-      https: false,
+      https: true,
     },
     build: {
       outDir: 'build',
