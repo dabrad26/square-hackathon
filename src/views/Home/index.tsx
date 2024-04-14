@@ -42,7 +42,7 @@ class Home extends React.Component<RouteComponentProps> {
         </div>
         <div className="photo-from-customers">
           <p className="heading-text">Customer favorites</p>
-          <PhotoWallArea className="picture-wrapper" openItem={this.openReview} pictures={dataService.getPhotos()} />
+          <PhotoWallArea className="picture-wrapper" flatSize={120} openItem={this.openReview} pictures={dataService.getPhotos()} />
           <button className="open-all" type="button" onClick={this.openPhotos}>See the photo wall</button>
         </div>
         <div className="location">
