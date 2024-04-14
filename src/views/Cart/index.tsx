@@ -70,7 +70,7 @@ class Cart extends React.Component<RouteComponentProps> {
   private get cartView(): React.ReactNode {
     const { tipPercent, promoCode } = this.state;
     const pickup = new Date();
-    pickup.setHours(pickup.getHours() + 1);
+    pickup.setMinutes(pickup.getMinutes() + 25);
 
     const tipOptions = [0, 15, 18, 20];
     const tax = this.baseTotal * 0.07;
@@ -81,7 +81,7 @@ class Cart extends React.Component<RouteComponentProps> {
         <div className="cart-pickup">
           <div className="cart-pickup--item">
             <IconNav color={textSecondary} size={16} />
-            1455 Market St, San Francisco
+            {dataService.businessInfo.address}, {dataService.businessInfo.city}
           </div>
           <div className="cart-pickup--item">
             <IconTime color={textSecondary} size={16} />
@@ -167,7 +167,7 @@ class Cart extends React.Component<RouteComponentProps> {
 
   render (): React.ReactNode {
     return (
-      <div className={`cart ${this.cartHasContent ? 'has-floating-button' : ''}`}>
+      <div className={`cart standard-top-padding ${this.cartHasContent ? 'has-floating-button' : ''}`}>
         <h1>Cart</h1>
         <div className="cart-items">
           {this.cartHasContent ? this.cartView : this.emptyCart}

@@ -157,7 +157,7 @@ class Submit extends React.Component<RouteComponentProps<{ id?: string }>> {
                   return <div key={index} className="picture-item" style={{ backgroundImage: `url(${item.url})` }} />;
                 })}
               </div>
-              <button onClick={this.seeAllPhotos}>See the photo wall</button>
+              <button type="button" onClick={this.seeAllPhotos}>See the photo wall</button>
             </div>
           </>
         );

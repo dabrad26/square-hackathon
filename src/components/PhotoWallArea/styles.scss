@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+
+.photo-wall-area {
+  .picture-area {
+    overflow-y: auto;
+    height: 100%;
+
+    .picture-group {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-start;
+      align-content: flex-start;
+
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
+    }
+
+    .picture-item {
+      @include picture-item();
+
+      cursor: pointer;
+    }
+  }
+}

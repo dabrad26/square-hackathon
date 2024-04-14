@@ -78,7 +78,7 @@ class ReviewDetails extends React.Component<RouteComponentProps<{ id: string }>>
     }
 
     return (
-      <div className="review-details has-floating-button">
+      <div className="review-details has-floating-button standard-top-padding">
         <button type="button" onClick={this.goToPhotoWall} className="breadcrumb">
           <IconLeftCaret color={primaryBrand} />
           <span>Photo wall</span>

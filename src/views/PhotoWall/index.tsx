@@ -4,7 +4,7 @@ import { type RouteComponentProps, withRouter } from 'react-router-dom';
 import FloatingButton from '../../components/FloatingButton';
 import dataService from '../../services/DataService';
 import type PhotoItem from '../../interfaces/Photo';
-import ErrorView from '../../components/ErrorView';
+import PhotoWallArea from '../../components/PhotoWallArea';
 
 class PhotoWall extends React.Component<RouteComponentProps> {
   state = {
@@ -36,10 +36,8 @@ class PhotoWall extends React.Component<RouteComponentProps> {
   render (): React.ReactNode {
     const { filterFood } = this.state;
 
-    const pictures = dataService.getPhotos(filterFood);
-
     return (
-      <div className="photo-wall has-floating-button">
+      <div className="photo-wall has-floating-button standard-top-padding">
         <h1>Photo wall</h1>
         <div className="filter">
           <div className="filter--label">
@@ -58,13 +56,7 @@ class PhotoWall extends React.Component<RouteComponentProps> {
             })}
           </div>
         </div>
-        <div className="picture-area">
-          {pictures.length
-            ? pictures.map((item, index) => {
-              return <button key={index} onClick={() => { this.openItem(item); }} className="picture-item" style={{ backgroundImage: `url(${item.url})` }} />;
-            })
-            : <ErrorView text="No pictures found" />}
-        </div>
+        <PhotoWallArea className="picture-area-wrapper" openItem={this.openItem} pictures={dataService.getPhotos(filterFood)} />
         <FloatingButton text="Submit your own" kind="secondary" onClick={this.submitOwn} />
       </div>
     );

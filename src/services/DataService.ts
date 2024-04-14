@@ -53,9 +53,14 @@ export class DataService {
     return testNumber.toFixed(2);
   }
 
-  get businessInfo(): { name: string } {
+  get businessInfo(): { name: string, address: string, city: string, state: string, zipCode: string, phone: string } {
     return {
       name: "Maya's Taqueria",
+      address: '1455 Market St',
+      city: 'San Francisco',
+      state: 'CA',
+      zipCode: '94103',
+      phone: '415-555-0199',
     };
   }
 

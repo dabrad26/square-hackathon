@@ -86,7 +86,7 @@ class MenuDetails extends React.Component<RouteComponentProps<{ id: string }>> {
     }
 
     return (
-      <div className="menu-details has-floating-button">
+      <div className="menu-details has-floating-button standard-top-padding">
         <div className="wrapped-items">
           <h1>{this.currentItem.name}</h1>
           <h2>{dataService.displayPrice(this.currentItem.basePrice)}</h2>

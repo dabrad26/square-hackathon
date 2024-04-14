@@ -35,7 +35,7 @@ class Menu extends React.Component<RouteComponentProps> {
 
   render (): React.ReactNode {
     return (
-      <div className="menu">
+      <div className="menu standard-top-padding">
         <h1>Full menu</h1>
         {this.itemsByCategories.map((item, index) => {
           return (

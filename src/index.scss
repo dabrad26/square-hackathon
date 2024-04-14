@@ -78,7 +78,6 @@ button {
   bottom: 0;
   overflow-y: auto;
   padding-bottom: 30px;
-  padding-top: 20px;
 }
 
 .app-root {
@@ -88,4 +87,8 @@ button {
   &.ios-device {
     height: -webkit-fill-available;
   }
+}
+
+.standard-top-padding {
+  padding-top: 20px !important;
 }

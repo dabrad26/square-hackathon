@@ -1,0 +1,81 @@
+@import '../../styles/variables';
+
+.home {
+  .banner {
+    height: 320px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding-top: 240px;
+    margin-bottom: 24px;
+  }
+
+  .primary-action {
+    @include medium-font();
+
+    padding: 0 16px;
+    min-width: 326px;
+    color: $text-on-color;
+    background-color: $brand-primary;
+    height: 48px;
+    border-radius: 32px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .photo-from-customers {
+    margin-top: 24px;
+    margin-left: 16px;
+    margin-bottom: 24px;
+
+    .heading-text {
+      @include large-bold-font();
+
+      margin-bottom: 12px;
+    }
+
+    .picture-wrapper {
+      height: 256px;
+    }
+
+    .open-all {
+      @include medium-font();
+
+      border: 1px solid $brand-primary;
+      padding: 0 16px;
+      color: $brand-primary;
+      background-color: transparent;
+      height: 32px;
+      border-radius: 32px;
+      margin-left: auto;
+      margin-right: 16px;
+      display: block;
+      margin-top: 12px;
+    }
+  }
+
+  .location {
+    padding: 0 16px;
+    margin-bottom: 24px;
+
+    .heading-text {
+      @include large-bold-font();
+
+      margin-bottom: 12px;
+    }
+
+    .map-area {
+      margin-top: 24px;
+      width: 100%;
+      height: 320px;
+
+      #icon-marker {
+        top: -82px;
+        position: relative;
+        left: -41px;
+      }
+    }
+  }
+}

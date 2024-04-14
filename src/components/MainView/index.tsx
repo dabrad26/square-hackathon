@@ -7,6 +7,7 @@ import Menu from '../../views/Menu';
 import MenuDetails from '../../views/MenuDetails';
 import Cart from '../../views/Cart';
 import ErrorView from '../ErrorView';
+import Home from '../../views/Home';
 
 class MainView extends React.Component<RouteComponentProps> {
   render (): React.ReactNode {
@@ -14,7 +15,7 @@ class MainView extends React.Component<RouteComponentProps> {
       <div className="main-view">
         <Switch>
           <Route exact={true} path="/">
-            <PhotoWall />
+            <Home />
           </Route>
           <Route exact={true} path="/submit">
             <Submit />

@@ -107,7 +107,7 @@ $subtle-border: #F2F4F5;
   color: $text-primary;
 }
 
-@mixin picture-item($size: 129px) {
+@mixin picture-item($size: 120px) {
   width: $size;
   height: $size;
   min-width: $size;
