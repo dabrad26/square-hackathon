@@ -22,9 +22,11 @@ class MenuDetails extends React.Component<RouteComponentProps<{ id: string }>> {
   private currentItem: MenuItem = { variations: [] } as unknown as MenuItem;
 
   private goBack = (): void => {
-    const { history } = this.props;
+    const { history, location } = this.props;
+    const basePath = location.pathname.split('/');
+    basePath.pop();
 
-    history.push('/menu');
+    history.push(basePath.join('/'));
   };
 
   private addToOrder = (): void => {

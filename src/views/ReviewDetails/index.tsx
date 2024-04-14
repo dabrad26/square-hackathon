@@ -34,7 +34,7 @@ class ReviewDetails extends React.Component<RouteComponentProps<{ id: string }>>
   private goToMenuItem = (id: string): void => {
     const { history } = this.props;
 
-    history.push(`/menu/${id}`);
+    history.push(`/review/${this.review.id || ''}/${id}`);
   };
 
   private share = (): void => {

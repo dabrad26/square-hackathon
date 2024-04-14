@@ -26,8 +26,11 @@ class MainView extends React.Component<RouteComponentProps> {
           <Route path="/photos" exact={true}>
             <PhotoWall />
           </Route>
-          <Route path="/review/:id">
+          <Route path="/review/:id" exact={true}>
             <ReviewDetails />
+          </Route>
+          <Route path="/review/:review_id/:id">
+            <MenuDetails />
           </Route>
           <Route path="/menu" exact={true}>
             <Menu />
