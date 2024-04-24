@@ -100,7 +100,7 @@ class MenuDetails extends React.Component<RouteComponentProps<{ id: string }>> {
           {dataService.getPhotos(this.currentItem.name).map((item, index) => {
             return (
               <div key={index} className="picture-item" style={{ backgroundImage: `url(${item.url})` }}>
-                <div className="picture-item--tag"><IconSmile color={darkTextOnColor} /></div>
+                <div className="picture-item--tag" title="Customer submitted"><IconSmile color={darkTextOnColor} /></div>
               </div>
             );
           })}
