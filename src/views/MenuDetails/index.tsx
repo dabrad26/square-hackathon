@@ -8,8 +8,9 @@ import dataService from '../../services/DataService';
 import Loading from '../../components/Loading';
 import ErrorView from '../../components/ErrorView';
 import IconMinus from '../../icons/Minus';
-import { primaryBrand } from '../../styles/colors';
+import { darkTextOnColor, primaryBrand } from '../../styles/colors';
 import IconPlus from '../../icons/Plus';
+import IconSmile from '../../icons/Smile';
 
 class MenuDetails extends React.Component<RouteComponentProps<{ id: string }>> {
   state = {
@@ -97,9 +98,14 @@ class MenuDetails extends React.Component<RouteComponentProps<{ id: string }>> {
         <div className="picture-area">
           {!!this.currentItem.image && <div className="picture-item" style={{ backgroundImage: `url(${this.currentItem.image})` }} />}
           {dataService.getPhotos(this.currentItem.name).map((item, index) => {
-            return <div key={index} className="picture-item" style={{ backgroundImage: `url(${item.url})` }} />;
+            return (
+              <div key={index} className="picture-item" style={{ backgroundImage: `url(${item.url})` }}>
+                <div className="picture-item--tag"><IconSmile color={darkTextOnColor} /></div>
+              </div>
+            );
           })}
         </div>
+        <div className="picture-tag-info"><IconSmile color={darkTextOnColor} /> = customer submitted</div>
         <div className="wrapped-items">
           <div className="quantity-change">
             <button type="button" onClick={this.decreaseQuantity} className="quantity-change--action"><IconMinus color={primaryBrand} /></button>

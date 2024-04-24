@@ -25,10 +25,40 @@
     align-content: flex-start;
     overflow: auto;
     margin: 29px 0;
+    padding-left: 16px;
+    margin-bottom: 4px;
 
     .picture-item {
-      @include picture-item(153px);
+      @include picture-item(160px);
+
+      position: relative;
+
+      .picture-item--tag {
+        background-color: $brand-accent;
+        text-align: center;
+        padding-top: 2px;
+        border-radius: 24px;
+        height: 24px;
+        width: 36px;
+        position: absolute;
+        top: 7px;
+        right: 8px;
+      }
     }
+  }
+
+  .picture-tag-info {
+    @include tiny-regular-font();
+
+    background-color: $brand-accent;
+    border-radius: 24px;
+    height: 24px;
+    width: 165px;
+    margin-bottom: 25px;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .quantity-change {
