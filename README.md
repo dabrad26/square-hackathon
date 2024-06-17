@@ -4,7 +4,7 @@
 
 ### Initial setup
 
-- Clone the projexr and `cd` into the project. 
+- Clone the repo and `cd` into the project. 
 - Run `npm ci` to install dependencies.
 - Use the command below based on use case. 
 
