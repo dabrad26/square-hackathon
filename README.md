@@ -2,6 +2,12 @@
 
 ## Getting Started
 
+### Initial setup
+
+- Clone the projexr and `cd` into the project. 
+- Run `npm ci` to install dependencies.
+- Use the command below based on use case. 
+
 ### `npm start`
 
 Runs the app in the development mode.
